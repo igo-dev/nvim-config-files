@@ -11,5 +11,5 @@ git clone https://github.com/igo-dev/nvim-config-files.git ~/AppData/Local/nvim
 Linux install:
 
 ```bash
-~/.config/nvim
+git clone https://github.com/igo-dev/nvim-config-files.git ~/.config/nvim
 ```
