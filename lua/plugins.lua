@@ -4,9 +4,9 @@ vim.opt.listchars:append "eol:↴"
 
 return require('packer').startup(function(use)
 
-	use 'wbthomason/packer.nvim'
+  use 'wbthomason/packer.nvim'
 
-	use {
+  use {
     "kyazdani42/nvim-tree.lua",
     requires = "kyazdani42/nvim-web-devicons" ,
     wants = "nvim-web-devicons",
@@ -22,13 +22,15 @@ return require('packer').startup(function(use)
     end
   }
 
-  use {'nyoom-engineering/oxocarbon.nvim'}
+  use 'vim-autoformat/vim-autoformat'
 
-	use {
-		'nvim-treesitter/nvim-treesitter',
+  use 'nyoom-engineering/oxocarbon.nvim'
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
-        require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter.configs').setup {
         ensure_installed = { "c", "lua", "cpp", "java", "bash" },
         sync_install = false,
         highlight = {
@@ -36,56 +38,82 @@ return require('packer').startup(function(use)
           additional_vim_regex_hightlighting = true,
         },
         indent = { enable = true },
-        }
-		end
-	}
-
-	use {
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require('indent_blankline').setup {
-			
-		space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = true,
-
-			}
-
-	end
-}
-
-use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-    config = function()
-    require('lualine').setup()
+      }
     end
   }
 
-use {
-    'Shatur/neovim-cmake',
-    requires = { 'nvim-lua/plenary.nvim' }, 
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require('indent_blankline').setup {
+        space_char_blankline = " ",
+      }
+
+    end
   }
 
---> lsp
-use {
-  'williamboman/mason.nvim',
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function()
-    require('mason').setup()
-    end  
-}
+      require('lualine').setup()
+    end
+  }
 
-use {
+  use {
+    'Shatur/neovim-cmake',
+    requires = { 'nvim-lua/plenary.nvim' },
+  }
+
+  --> lsp
+  use {
+    'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup()
+    end
+  }
+
+  use {
     'williamboman/mason-lspconfig.nvim',
     config = function()
-    require('mason-lspconfig').setup()
+      require('mason-lspconfig').setup()
     end
   }
 
-use 'neovim/nvim-lspconfig'
-use 'hrsh7th/nvim-cmp'
+  use 'neovim/nvim-lspconfig'
 
-use {
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function()
+      require('cmp').setup {
+
+        mapping = {
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif cmp.visible() then
+              cmp.confirm({ select = false })
+            else
+              fallback()
+            end
+          end, { "i", "s" })
+
+        },
+        sources = {
+          { name = "nvim_lua" },
+          { name = "nvim_lsp" },
+          { name = "buffer" },
+        }
+      }
+    end
+  }
+
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-nvim-lua'
+  use 'hrsh7th/cmp-nvim-lsp'
+
+  use {
     'weilbith/nvim-code-action-menu',
     cmd = 'CodeActionMenu'
   }
