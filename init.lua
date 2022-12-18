@@ -1,29 +1,3 @@
-local g = vim.g
-local wo = vim.wo
-local bo = vim.bo
-local o = vim.o
-local map = vim.api.nvim_set_keymap
-local set = vim.opt
-local cmd = vim.cmd
-
-map("n", "<C-c>", ":NvimTreeToggle<CR>", { silent = true })
-map("n", "<C-\\>", ":CodeActionMenu<CR>", { silent = true })
-map("n", "<C-[>", "<cmd>po<CR>", { noremap = true, silent = true })
---map("i", "<TAB>", "<CR>", { noremap = true, silent = true })
---map("i", "<S-TAB>", "<C-p>", { noremap = true, silent = true })
-
-vim.opt.background = "dark"
-set.pumheight = 10
-set.expandtab = true
-set.tabstop = 2
-set.softtabstop = 2
-set.shiftwidth = 2
-set.relativenumber = true
-vim.opt.list = true
-vim.opt.listchars:append "space:."
---vim.opt.listchars:append "eol:â´"
-cmd("colorscheme oxocarbon")
-
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -153,6 +127,34 @@ return require('packer').startup(function(use)
   end
 end)
 
+--[====[
+local g = vim.g
+local wo = vim.wo
+local bo = vim.bo
+local o = vim.o
+local map = vim.api.nvim_set_keymap
+local set = vim.opt
+local cmd = vim.cmd
+
+map("n", "<C-c>", ":NvimTreeToggle<CR>", { silent = true })
+map("n", "<C-\\>", ":CodeActionMenu<CR>", { silent = true })
+map("n", "<C-[>", "<cmd>po<CR>", { noremap = true, silent = true })
+--map("i", "<TAB>", "<CR>", { noremap = true, silent = true })
+--map("i", "<S-TAB>", "<C-p>", { noremap = true, silent = true })
+
+vim.opt.background = "dark"
+set.pumheight = 10
+set.expandtab = true
+set.tabstop = 2
+set.softtabstop = 2
+set.shiftwidth = 2
+set.relativenumber = true
+vim.opt.list = true
+vim.opt.listchars:append "space:."
+--vim.opt.listchars:append "eol:â´"
+cmd("colorscheme oxocarbon")
+
+--]====]
 --require('packer')
 --require('nvim-treesitter')
 --require('cmp')
