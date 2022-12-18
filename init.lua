@@ -41,10 +41,10 @@ return require('packer').startup(function(use)
     config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = { "c", "lua", "cmake", "cpp", "bash" },
-        sync_install = false,
+        sync_install = true,
         highlight = {
-          enable = true,
-          additional_vim_regex_hightlighting = true,
+          enable = false,
+          additional_vim_regex_hightlighting = false,
         },
         indent = { enable = true },
       }
