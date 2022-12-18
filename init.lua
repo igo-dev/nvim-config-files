@@ -3,7 +3,7 @@ local ensure_packer = function()
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    cmd [[packadd packer.nvim]]
+    vim.cmd [[packadd packer.nvim]]
     return true
   end
   return false
@@ -40,7 +40,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "c", "lua", "cpp", "java", "bash" },
+        ensure_installed = { "c", "lua", "cmake", "cpp", "bash" },
         sync_install = false,
         highlight = {
           enable = true,
@@ -125,9 +125,7 @@ return require('packer').startup(function(use)
   if packer_bootstrap then
     require('packer').sync()
   end
-end)
 
---[====[
 local g = vim.g
 local wo = vim.wo
 local bo = vim.bo
@@ -139,8 +137,6 @@ local cmd = vim.cmd
 map("n", "<C-c>", ":NvimTreeToggle<CR>", { silent = true })
 map("n", "<C-\\>", ":CodeActionMenu<CR>", { silent = true })
 map("n", "<C-[>", "<cmd>po<CR>", { noremap = true, silent = true })
---map("i", "<TAB>", "<CR>", { noremap = true, silent = true })
---map("i", "<S-TAB>", "<C-p>", { noremap = true, silent = true })
 
 vim.opt.background = "dark"
 set.pumheight = 10
@@ -150,16 +146,8 @@ set.softtabstop = 2
 set.shiftwidth = 2
 set.relativenumber = true
 vim.opt.list = true
-vim.opt.listchars:append "space:."
+--vim.opt.listchars:append "space:."
 --vim.opt.listchars:append "eol:â´"
 cmd("colorscheme oxocarbon")
 
---]====]
---require('packer')
---require('nvim-treesitter')
---require('cmp')
---require('indent_blankline')
---require('cmake')
---require('mason')
---require('mason-lspconfig')
-
+end)

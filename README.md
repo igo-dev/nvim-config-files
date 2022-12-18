@@ -4,8 +4,8 @@ My personal neovim config, this repo is for simplified setup on new machines.
 
 Windows install:
 
-```bash
-winget install -e --id LLVM.LLVM
+```
+winget install Microsoft.PowerShell
 ```
 
 ```bash
