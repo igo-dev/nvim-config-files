@@ -115,7 +115,12 @@ return require('packer').startup(function(use)
     end
   }
 
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require'lspconfig'.clangd.setup{}
+    end
+  }
 
   use {
     'hrsh7th/nvim-cmp',
@@ -155,5 +160,4 @@ end)
 --require('cmake')
 --require('mason')
 --require('mason-lspconfig')
---require'lspconfig'.clangd.setup{}
 
